@@ -15,3 +15,13 @@ exports.getNotes = (req, res) => {
   const userNotes = notes.filter(note => note.user === req.user.email);
   res.json(userNotes);
 };
+
+exports.updateNote = (req, res) => {
+  const noteId = parseInt(req.params.id);
+  const note = notes.find(n => n.id === noteId && n.user === req.user.email);
+
+  if (!note) return res.status(404).json({ message: "Note not found" });
+
+  note.content = req.body.content;
+  res.json(note);
+};

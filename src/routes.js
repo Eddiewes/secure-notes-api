@@ -9,7 +9,7 @@ router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.post("/notes", authMiddleware, notesController.createNote);
 router.get("/notes", authMiddleware, notesController.getNotes);
-
+router.put("/notes/:id", authMiddleware, notesController.updateNote);
 
 router.get("/health", (req, res) => {
   res.json({ status: "ok", uptime: process.uptime() });
