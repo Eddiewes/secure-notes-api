@@ -25,3 +25,13 @@ exports.updateNote = (req, res) => {
   note.content = req.body.content;
   res.json(note);
 };
+
+exports.deleteNote = (req, res) => {
+  const noteId = parseInt(req.params.id);
+  const index = notes.findIndex(n => n.id === noteId && n.user === req.user.email);
+
+  if (index === -1) return res.status(404).json({ message: "Note not found" });
+
+  notes.splice(index, 1);
+  res.json({ message: "Note deleted" });
+};
