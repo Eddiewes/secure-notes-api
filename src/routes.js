@@ -8,5 +8,8 @@ const router = express.Router();
 router.post("/register", authController.register);
 router.post("/login", authController.login);
 router.post("/notes", authMiddleware, notesController.createNote);
+router.get("/health", (req, res) => {
+  res.json({ status: "ok", uptime: process.uptime() });
+});
 
 module.exports = router;
