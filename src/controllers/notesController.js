@@ -10,3 +10,8 @@ exports.createNote = (req, res) => {
   notes.push(note);
   res.status(201).json(note);
 };
+
+exports.getNotes = (req, res) => {
+  const userNotes = notes.filter(note => note.user === req.user.email);
+  res.json(userNotes);
+};
